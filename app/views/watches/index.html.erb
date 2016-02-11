@@ -1,0 +1,37 @@
+<h1>Listing Watches</h1>
+
+<table border="2">
+  <thead>
+    <tr>
+      <th>Company Name</th>
+      <th>Model Number</th>
+      <th>Quantity</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @watches.each do |watch| %>
+      <tr>
+      	<td><%= watch.company %></td>
+        <td id="mno"><%= watch.mno %></td>
+        <td><%= watch.qty %></td>
+        <td><%= watch.owner %></td>
+        <% if buyer_signed_in? %>
+        	<td><%= link_to 'Buy', add_path(:watch => watch.id)%></td>
+        <% end %>
+        <td><%= link_to 'Show', watch %></td>
+        <% if seller_signed_in? %>
+        	<% if current_seller.id == watch.owner %>
+        		<td><%= link_to 'Edit', edit_watch_path(watch) %></td>
+        		<td><%= link_to 'Destroy', watch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        	<% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Watch', new_watch_path %>

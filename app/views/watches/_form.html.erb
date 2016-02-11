@@ -1,0 +1,30 @@
+<%= form_for(@watch) do |f| %>
+  <% if @watch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@watch.errors.count, "error") %> prohibited this watch from being saved:</h2>
+
+      <ul>
+      <% @watch.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+  	<%= f.label "Company name" %><br>
+    <%= f.text_field :company %>
+  </div>
+  <div class="field">
+  	<%= f.label "Model number" %><br>
+    <%= f.text_field :mno %>
+  </div>
+  <div class="field">
+  	<%= f.label "Quantity" %><br>
+    <%= f.text_field :qty %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EComm</title>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="user_header">
+	
+	<% if current_seller %> SELLER:
+	  Logged in as <%= current_seller.email %> OwnerID: <%= current_seller.id %><br />
+	  <%= link_to "Seller Log out", destroy_seller_session_path, method: :delete %>
+	
+	<% else %>
+	  <% if current_buyer %> BUYER:
+	  Logged in as <%= current_buyer.email %> OwnerID: <%= current_buyer.id %><br />
+	  <%= link_to "Buyer Log out", destroy_buyer_session_path, method: :delete %>
+	  <% end %>
+	<% end %>
+	<% if !person_signed_in? %>	
+	  <%= link_to "Seller Sign Up",  new_seller_registration_path %> OR
+	  <%= link_to "Seller Log In", seller_session_path %> ||&nbsp;
+	  <%= link_to "Buyer Sign Up",  new_buyer_registration_path %> OR
+	  <%= link_to "Buyer Log In", buyer_session_path %>
+	<% end %>
+	
+	|<%= link_to "Home", root_path %>
+
+</div>
+<%= yield %>
+
+</body>
+</html>
