@@ -81,6 +81,6 @@ class WatchesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def watch_params
       #params.require(:watch).permit!
-      params.require(:watch).permit(:company, :mno, :qty)
+      params.require(:watch).permit(:company, :mno, :qty, :imgurl)
     end
 end

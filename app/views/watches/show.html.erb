@@ -6,12 +6,14 @@
 		<th>Model</th>
 		<th>Quantity</th>
 		<th>Owner</th>
+		<th>Image</th>
 	</tr>
 	<tr>
 		<td><%= @watch.company %></td>
 		<td><%= @watch.mno %></td>
 		<td><%= @watch.qty %></td>
 		<td><%= @watch.owner %></td>
+		<td><%= @watch.imgurl %></td>
 	</tr>
 </table>
 <% if seller_signed_in? && current_seller.id == @watch.owner %>

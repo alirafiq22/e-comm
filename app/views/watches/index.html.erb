@@ -1,37 +1,31 @@
-<h1>Listing Watches</h1>
+<div id="main container" class="conatiner">
+	<div class="jumbotron well-lg">
+		<h1>Welcome to Watchkeen</h1><br>
+		<h6>Your Place to Shop !!</h6>
+	</div> <!-- JUMBOTRON END -->
+	<div id="content" class="col-xs-3">left bar (filters)</div>
+	<div id="sidebar" class="col-xs-9">**right bar (content)**
+		<h1>Listing Watches</h1>
+		<div class="container">
+			<div class="row">
+			<% i = 1 %>
+			<% @watches.each do |watch| %>
+				<div class="col-md-6 watch" align="center" id="<%=i%>">
+					<img src="assets/<%= watch.imgurl %>"/> <br />
+					<%= watch.company %>
+					<%= watch.mno %>
+					<%= watch.imgurl %>
+					<% i = i+1 %>
+				</div>
+			<% end %>
+			</div> <!-- WATCH ROW END -->
+			<%= link_to "All Watches", watches_path, class: 'btn btn-success' %>
+		</div>		
+	</div>
+	<br>
+</div>
 
-<table border="2">
-  <thead>
-    <tr>
-      <th>Company Name</th>
-      <th>Model Number</th>
-      <th>Quantity</th>
-      <th>Owner</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @watches.each do |watch| %>
-      <tr>
-      	<td><%= watch.company %></td>
-        <td id="mno"><%= watch.mno %></td>
-        <td><%= watch.qty %></td>
-        <td><%= watch.owner %></td>
-        <% if buyer_signed_in? %>
-        	<td><%= link_to 'Buy', add_path(:watch => watch.id)%></td>
-        <% end %>
-        <td><%= link_to 'Show', watch %></td>
-        <% if seller_signed_in? %>
-        	<% if current_seller.id == watch.owner %>
-        		<td><%= link_to 'Edit', edit_watch_path(watch) %></td>
-        		<td><%= link_to 'Destroy', watch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        	<% end %>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Watch', new_watch_path %>
+<% if seller_signed_in? %>
+<%= link_to 'New Watch', new_watch_path, class: 'btn btn-success' %>
+<% end %>
+ 

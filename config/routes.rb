@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :watches
   resources :carts
     
-  root 'page#index'
+  root 'watches#index'
+  get 'pages' => 'page#index'
   match 'carts' => 'carts#create', via: [:get, :post]
   get 'add' => 'carts#add'
   get 'buy' => 'watches#buy'
