@@ -7,31 +7,40 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+  <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.css" />
+  <link rel="script" href="stylesheets/script.js" />
 </head>
 <body>
 <div id="user_header">
-	
-	<% if current_seller %> SELLER:
-	  Logged in as <%= current_seller.email %> OwnerID: <%= current_seller.id %><br />
-	  <%= link_to "Seller Log out", destroy_seller_session_path, method: :delete %>
-	
-	<% else %>
-	  <% if current_buyer %> BUYER:
-	  Logged in as <%= current_buyer.email %> OwnerID: <%= current_buyer.id %><br />
-	  <%= link_to "Buyer Log out", destroy_buyer_session_path, method: :delete %>
-	  <% end %>
-	<% end %>
-	<% if !person_signed_in? %>	
-	  <%= link_to "Seller Sign Up",  new_seller_registration_path %> OR
-	  <%= link_to "Seller Log In", seller_session_path %> ||&nbsp;
-	  <%= link_to "Buyer Sign Up",  new_buyer_registration_path %> OR
-	  <%= link_to "Buyer Log In", buyer_session_path %>
-	<% end %>
-	
-	|<%= link_to "Home", root_path %>
-
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">WatchKeen</a>
+			</div>
+			<ul class="navbar-nav pull-right list-inline list-unstyled" display="inline-block"> 
+				<li class="<%= 'active' if current_page?(root_path)%>"><%= link_to 'Home', root_path %></li>
+				<% if current_seller %> 
+				<li><font size="3 em" color="red" weight="2" onmouseenter="this.color='white'" onmouseleave="this.color='red'"><%= current_seller.email %></b> OwnerID: <%= current_seller.id %></font></li>
+	  		 	<li><%= link_to "Seller Log out", destroy_seller_session_path, method: :delete %></li>
+				<% else %>
+				<% if current_buyer %>
+	  		 	<li><font size="3 em" color="red" weight="2" onmouseenter="this.color='white'" onmouseleave="this.color='red'"><%= current_buyer.email %> BuyerID: <%= current_buyer.id %></font></li>
+	  		 	<li><%= link_to "Buyer Log out", destroy_buyer_session_path, method: :delete %></li>
+	  			<% end %>
+				<% end %>
+				<% if !person_signed_in? %>	
+	  		 	<li class="<%= 'active' if current_page?(new_seller_registration_path)%>"><%= link_to 'Seller Sign Up',  new_seller_registration_path %></li>
+	  		 	<li class="<%= 'active' if current_page?(seller_session_path)%>"><%= link_to 'Seller Log In', seller_session_path %></li>
+	  		 	<li class="<%= 'active' if current_page?(new_buyer_registration_path)%>"><%= link_to 'Buyer Sign Up',  new_buyer_registration_path %></li>
+	  		 	<li class="<%= 'active' if current_page?(buyer_session_path)%>"><%= link_to 'Buyer Log In', buyer_session_path %></li>
+				<% end %>
+				
+			</ul>
+		</div>
+	</nav>
 </div>
 <%= yield %>
-
 </body>
 </html>
